@@ -26,20 +26,20 @@ git clone https://github.com/Benzlxs/tDBN.git
 ```
 
 2. Install Python dependencies
-The miniconda3 package manager package is recommended
+The miniconda3 package manager package is recommended.
 ```bash
 cd ./tDBN
 pip3 install -r requirements.txt
 ```
 
-3. Install Pytorch and SparseConvNet
+3. Install Pytorch. 
 Visiting pytorch official [webpage](https://pytorch.org/get-started/locally/) and installing 1.0 version PyTorch according to your hardware configuration.
 ```bash
 conda install pytorch torchvision cudatoolkit=9.0 -c pytorch
 ```
-Then, installing [SparseConvNet](https://github.com/traveller59/SparseConvNet) according to its README file.
+4. Install [SparseConvNet](https://github.com/traveller59/SparseConvNet) according to its README file.
 
-4. Compile the protos
+5. Compile the protos.
 ```bash
 cd ./tDBN
 bash protos/run_protoc.sh
