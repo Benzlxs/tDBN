@@ -99,6 +99,7 @@ def train(config_path,
           model_dir,
           result_path=None,
           create_folder=False,
+          details=False,
           display_step=50,
           summary_step=5,
           pickle_result=True):
@@ -331,7 +332,10 @@ def train(config_path,
                             metrics_str_list.append(f"{k}={v}")
                     log_str = ', '.join(metrics_str_list)
                     print(log_str, file=logf)
-                    print(log_str)
+                    if details==True:
+                        print(log_str)
+                    else:
+                        print("step=%d, steptime=%.3f, cls_loss=%.3f, loc_loss=%.3f lr=%f" % (global_step, step_time, net_metrics[ "cls_loss"], net_metrics[ "loc_loss"], metrics["lr"] ))
                 ckpt_elasped_time = time.time() - ckpt_start_time
                 if ckpt_elasped_time > train_cfg.save_checkpoints_secs:
                     torchplus.train.save_models(model_dir, [net, optimizer],
