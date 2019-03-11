@@ -96,7 +96,7 @@ bash train.sh
 3. Traing results are saved in output directory, check the `log.txt` and 'eval_log.txt' for detailed performance.
 
 
-# Evaluate and testing
+# Evaluate and inference
 1. Select your config file and output directory in `train.sh`, like setting `config`=`./configs/car_tDBN_bv_2.config` 
 2. Set the model path that you want to evaluate, `ckpt_path`
 3. If you want to evlaute, set `test=False`, if you want to generate testing result, set `test=True` and ` kitti_info_path=your_kitti_dataset_root/kitti_infos_test.pkl`
