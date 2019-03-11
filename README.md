@@ -1,7 +1,7 @@
 # 3DBN
 This repository contains the public release of the python implementation of [**3D Backbone Network for 3D Object Detection**](https://arxiv.org/abs/1901.08373), 
 
-If you use this code, please cite our paper:
+If you find this code useful, please cite our paper:
 ```
 @article{DBLP:journals/corr/abs-1901-08373,
   author    = {Xuesong Li and Jos{\'{e}} E. Guivant and Ngaiming Kwok and Yongzhi Xu},
