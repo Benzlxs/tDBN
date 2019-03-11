@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package tDBN.protos;
+import "tDBN/protos/tDBN.proto";
+message DetectionModel{
+    oneof model {
+        Model tDBN = 1;
+    }
+}

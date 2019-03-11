@@ -1,2 +1,115 @@
 # 3DBN
-This is the repository of 3D backbone network for 3D object detection. The code will be there soon after I make the source code clean and tidy.....
+This repository contains the public release of the python implementation of [**3D Backbone Network for 3D Object Detection**](https://arxiv.org/abs/1901.08373), 
+
+If you use this code, please cite our paper:
+```
+@article{DBLP:journals/corr/abs-1901-08373,
+  author    = {Xuesong Li and Jos{\'{e}} E. Guivant and Ngaiming Kwok and Yongzhi Xu},
+  title     = {3D Backbone Network for 3D Object Detection},
+  journal   = {CoRR},
+  volume    = {abs/1901.08373},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1901.08373},
+  archivePrefix = {arXiv},
+  eprint    = {1901.08373},
+}
+```
+Pipeline
+![GuidePic](./scripts/pipeline.png)
+
+
+# Install
+Implemented and tested on Ubuntu 16.04 with Python 3.6 and Pytorch 1.0.
+1. Clone the repo
+```bash
+git clone https://github.com/Benzlxs/tDBN.git
+```
+
+2. Install Python dependencies
+The miniconda3 package manager package is recommended
+```bash
+cd ./tDBN
+pip3 install -r requirements.txt
+```
+
+3. Install Pytorch and SparseConvNet
+Visiting pytorch official [webpage](https://pytorch.org/get-started/locally/) and installing 1.0 version PyTorch according to your hardware configuration.
+```bash
+conda install pytorch torchvision cudatoolkit=9.0 -c pytorch
+```
+Then, installing [SparseConvNet](https://github.com/traveller59/SparseConvNet) according to its README file.
+
+4. Compile the protos
+```bash
+cd ./tDBN
+bash protos/run_protoc.sh
+```
+
+# Dataset
+1. Downlaoad the [KITTI](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d) and arrange files as following:
+```plain
+kitti_dataset
+        training
+                image_2
+                label_2
+                calib
+                velodyne
+                velodyne_reduced
+        testing
+                image_2
+                calib
+                velodyne
+                velodyne_reduced
+```
+2. split dataset
+Under the folder, `./tDBN/kitti/data_split`, we provide the two set of data split, 50/50 split or 75/25 split, or you can customize your data split ratio.
+ 
+3. Create kitti dataset infos:
+```bash
+cd ./tDBN
+python ./scripts/create_data.py create_kitti_info_file --data_path=kitti_dataset
+```
+
+4. Create reduced point cloud:
+```bash
+cd ./tDBN
+python ./scripts/create_data.py create_reduced_point_cloud --data_path=kitti_dataset
+```
+
+5. Create groundtruth database:
+```bash
+cd ./tDBN
+python ./scripts/create_data.py create_groundtruth_database --data_path=kitti_dataset
+```
+
+6. Modify the directory in config file
+Go to the config folder and configurate the `database_info_path`, `kitti_info_path` and `kitti_root_path` to your path.
+
+
+# Training
+1. select your config file and output directory in `train.sh`, like setting `config`=`./configs/car_tDBN_bv_2.config`
+2. start to train:
+```bash
+cd ./tDBN
+bash train.sh
+```
+3. Traing results are saved in output directory, check the `log.txt` and 'eval_log.txt' for detailed performance.
+
+
+# Evaluate and testing
+1. Select your config file and output directory in `train.sh`, like setting `config`=`./configs/car_tDBN_bv_2.config` 
+2. Set the model path that you want to evaluate, `ckpt_path`
+3. If you want to evlaute, set `test=False`, if you want to generate testing result, set `test=True` and ` kitti_info_path=your_kitti_dataset_root/kitti_infos_test.pkl`
+4. Start to evaluate or inference:
+```bash
+cd ./tDBN
+bash evaluator.sh
+```
+5. Use pretrained model
+If you don't want to train your own model, we also provide some [pretrained model](https://www.dropbox.com/sh/91fl39566elgwzi/AABqz1S_LJInu72NhPKOjYYDa?dl=0).
+
+# Acknowledge
+Thanks to the team of [Yan Yan](https://github.com/traveller59) , we have benifited a lot from their previous work [SECOND](https://github.com/traveller59/second.pytorch).
+
+
+

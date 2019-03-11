@@ -1,0 +1,9 @@
+shapely
+fire
+pybind11
+protobuf
+scikit-image
+numba
+pillow
+tensorboardX
+
