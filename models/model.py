@@ -64,6 +64,7 @@ def get_paddings_indicator(actual_num, max_num, axis=0):
     # paddings_indicator shape: [batch_size, max_num]
     return paddings_indicator
 
+
 class LossNormType(Enum):
     NormByNumPositives = "norm_by_num_positives"
     NormByNumExamples = "norm_by_num_examples"
@@ -110,7 +111,7 @@ class Model(nn.Module):
                  encode_rad_error_by_sin=False,
                  loc_loss_ftor=None,
                  cls_loss_ftor=None,
-                 name='voxelnet'):
+                 name='model_net'):
         super().__init__()
         self.name = name
         self._num_class = num_class
@@ -462,12 +463,12 @@ class Model(nn.Module):
                         # box_preds[..., -1] += (
                         #     ~(dir_labels.byte())).type_as(box_preds) * np.pi
                     else:
-                        # benzlxs
+                        # using the absolute value
                         dir_labels = selected_dir_labels
                         inds1 = (box_preds[...,-1]>0)&(dir_labels.byte()<0.5)
-                        box_pred[...,inds1] -= torch.tensor(np.pi).type_as(box_preds)
+                        box_preds[inds1,-1] -= torch.tensor(np.pi).type_as(box_preds)
                         inds2 = (box_preds[...,-1]<0)&(dir_labels.byte()>0.5)
-                        box_pred[...,inds2] += torch.tensor(np.pi).type_as(box_preds)
+                        box_preds[inds2,-1] += torch.tensor(np.pi).type_as(box_preds)
 
                 final_box_preds = box_preds
                 final_scores = scores
@@ -595,7 +596,7 @@ def add_sin_difference(boxes1, boxes2):
 
 def limit_reg_target(boxes):
     '''
-        limit the reg_target to [-1/4*np.pi, 1/4*np.pi], benzlxs
+        limit the reg_target to [-1/4*np.pi, 1/4*np.pi],
     '''
     #TODO where to put this block of code the make it more efficient
     # inds1 = torch.where( boxes[...,-1:] < torch.tensor( -3./4.*np.pi).type_as(box_preds) )

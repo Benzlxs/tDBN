@@ -335,7 +335,8 @@ def train(config_path,
                     if details==True:
                         print(log_str)
                     else:
-                        print("step=%d, steptime=%.3f, cls_loss=%.3f, loc_loss=%.3f lr=%f" % (global_step, step_time, net_metrics[ "cls_loss"], net_metrics[ "loc_loss"], metrics["lr"] ))
+                        print("step=%d, steptime=%.3f, cls_loss=%.3f, loc_loss=%.3f lr=%f" % (global_step,
+                                        step_time, net_metrics[ "cls_loss_rt"], net_metrics[ "loc_loss_rt"], metrics["lr"] ))
                 ckpt_elasped_time = time.time() - ckpt_start_time
                 if ckpt_elasped_time > train_cfg.save_checkpoints_secs:
                     torchplus.train.save_models(model_dir, [net, optimizer],

@@ -179,7 +179,6 @@ class det_net(nn.Module):
         fuse32 = torch.cat([x2, up3], dim=1)
         fuse32 = self.upsample2_after_concate_fuse32(fuse32)
         # concate210
-        # TODO, replace back after fixing the bug
         fuse210= torch.cat([down0, x1, fuse32 ],dim=1)
         xx = self.output_after_concate_fuse210(fuse210)
         # x = torch.cat([down0, x1, fuse32 ],dim=1)
