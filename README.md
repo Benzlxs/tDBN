@@ -121,9 +121,10 @@ Car (Orientation)	89.93 %	87.95 %	79.32 %
 Car (3D Detection)	83.56 %	74.64 %	66.76 %
 Car (Bird's Eye View)	88.13 %	79.40 %	77.97 %
 ```
-
+<!---
 6. Use pretrained model
 If you don't want to train your own model, we also provide some [pretrained model](https://www.dropbox.com/sh/91fl39566elgwzi/AABqz1S_LJInu72NhPKOjYYDa?dl=0).
+--->
 
 # Acknowledge
 Thanks to the team of [Yan Yan](https://github.com/traveller59) , we have benifited a lot from their previous work [SECOND](https://github.com/traveller59/second.pytorch).
