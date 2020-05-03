@@ -1,8 +1,8 @@
 # 3DBN
 This repository contains the python implementation of 3D Backbone Network for 3D Object Detection.
 
-# NOTE-2020-5-3
-**The new version of thes code can be found [Det3D](https://github.com/Benzlxs/Det3D). In the new version of 3DBN, we are using the [spconv](https://github.com/Benzlxs/spconv), which can make detection more efficienct and feasible for building deeper network model for higher accuracy.**
+**NOTE-2020-5-3
+The new version of thes code can be found [Det3D](https://github.com/Benzlxs/Det3D). In the new version of 3DBN, we are using the [spconv](https://github.com/Benzlxs/spconv), which can make detection more efficienct and feasible for building deeper network model for higher accuracy.**
 
 
 Pipeline
